@@ -30,7 +30,7 @@ func main() {
 	r := rag.NewRAG(
 		ctx,
 		rag.RAGConfig{
-			Storage: storage.NewPineConeRAGStorage(pc, storage.PineConeRAGStorageConfig{
+			Storage: storage.NewPineconeRAGStorage(pc, storage.PineconeRAGStorageConfig{
 				UserID:    "your-user-id",
 				FolderID:  "your-folder-id",
 				IndexName: IndexName,
@@ -40,7 +40,7 @@ func main() {
 				ChunkSize:    ChunkSize,
 				ChunkOverlap: ChunkOverlap,
 			}),
-			Embedder:      storage.NewPineConeRAGEmbedder(pc, storage.PineConeRAGEmbedderConfig{}),
+			Embedder:      storage.NewPineconeRAGEmbedder(pc, storage.PineconeRAGEmbedderConfig{}),
 			InputFilePath: "./data.txt",
 		},
 	)

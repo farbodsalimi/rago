@@ -6,31 +6,31 @@ import (
 	"github.com/farbodsalimi/rago/pkg/rag"
 )
 
-var _ rag.Storage = PineConeRAGStorage{}
+var _ rag.Storage = PineconeRAGStorage{}
 
-type PineConeRAGStorageConfig struct {
+type PineconeRAGStorageConfig struct {
 	UserID    string
 	FolderID  string
 	IndexName string
 	Namespace string
 }
 
-type PineConeRAGStorage struct {
+type PineconeRAGStorage struct {
 	client *PineconeClient
-	config PineConeRAGStorageConfig
+	config PineconeRAGStorageConfig
 }
 
-func NewPineConeRAGStorage(
+func NewPineconeRAGStorage(
 	client *PineconeClient,
-	config PineConeRAGStorageConfig,
-) *PineConeRAGStorage {
-	return &PineConeRAGStorage{
+	config PineconeRAGStorageConfig,
+) *PineconeRAGStorage {
+	return &PineconeRAGStorage{
 		client: client,
 		config: config,
 	}
 }
 
-func (p PineConeRAGStorage) Store(ctx context.Context, chunks []rag.Chunk) error {
+func (p PineconeRAGStorage) Store(ctx context.Context, chunks []rag.Chunk) error {
 	for _, chunk := range chunks {
 		err := p.client.Upsert(
 			p.config.UserID,
@@ -46,7 +46,7 @@ func (p PineConeRAGStorage) Store(ctx context.Context, chunks []rag.Chunk) error
 	return nil
 }
 
-func (p PineConeRAGStorage) Search(
+func (p PineconeRAGStorage) Search(
 	ctx context.Context,
 	query rag.Query,
 	embedding []float32,
@@ -80,6 +80,6 @@ func (p PineConeRAGStorage) Search(
 	return results, nil
 }
 
-func (p PineConeRAGStorage) Delete(ctx context.Context, documentID string) error {
+func (p PineconeRAGStorage) Delete(ctx context.Context, documentID string) error {
 	panic("implement me")
 }

@@ -7,26 +7,26 @@ import (
 	"github.com/farbodsalimi/rago/pkg/rag"
 )
 
-var _ rag.Embedder = PineConeRAGEmbedder{}
+var _ rag.Embedder = PineconeRAGEmbedder{}
 
-type PineConeRAGEmbedderConfig struct{}
+type PineconeRAGEmbedderConfig struct{}
 
-type PineConeRAGEmbedder struct {
+type PineconeRAGEmbedder struct {
 	client *PineconeClient
-	config PineConeRAGEmbedderConfig
+	config PineconeRAGEmbedderConfig
 }
 
-func NewPineConeRAGEmbedder(
+func NewPineconeRAGEmbedder(
 	client *PineconeClient,
-	config PineConeRAGEmbedderConfig,
-) *PineConeRAGEmbedder {
-	return &PineConeRAGEmbedder{
+	config PineconeRAGEmbedderConfig,
+) *PineconeRAGEmbedder {
+	return &PineconeRAGEmbedder{
 		client: client,
 		config: config,
 	}
 }
 
-func (e PineConeRAGEmbedder) Embed(ctx context.Context, text string) ([]float32, error) {
+func (e PineconeRAGEmbedder) Embed(ctx context.Context, text string) ([]float32, error) {
 	res, err := e.client.Embed([]string{text})
 	if err != nil {
 		return nil, fmt.Errorf("failed to embed text: %w", err)
